@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RaktSetu - Blood Inventory</title>
+
+    <link rel="stylesheet" href="inventory.css"/>
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="fa-solid fa-droplet"></i>
+            </div>
+
+            <div>
+                <h2>RaktSetu</h2>
+                <p>Blood Network</p>
+            </div>
+        </div>
+
+        <div class="menu-title">Workspace</div>
+
+        <ul class="menu">
+            <li>
+                <i class="fa-solid fa-table-cells-large"></i>
+                Dashboard
+            </li>
+
+            <li class="active">
+                <i class="fa-solid fa-droplet"></i>
+                Inventory
+            </li>
+
+            <li>
+                <i class="fa-regular fa-clipboard"></i>
+                Requests
+            </li>
+
+            <li>
+                <i class="fa-regular fa-calendar"></i>
+                Reservations
+            </li>
+
+            <li>
+                <i class="fa-regular fa-bell"></i>
+                Alerts
+            </li>
+
+            <li>
+                <i class="fa-solid fa-chart-column"></i>
+                Reports
+            </li>
+        </ul>
+
+        <div class="signout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            Sign out
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+        <!-- TOP NAV -->
+        <header class="topbar">
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search inventory, requests...">
+            </div>
+
+            <div class="top-right">
+
+                <div class="notification">
+                    <i class="fa-regular fa-bell"></i>
+                    <span>3</span>
+                </div>
+
+                <div class="profile">
+                    <div class="avatar">MA</div>
+
+                    <div>
+                        <h4>Blood Bank</h4>
+                        <p>Central Authority</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE -->
+        <section class="page">
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Blood Inventory</h1>
+                    <p>Current Blood Stock Availability</p>
+                </div>
+
+                <div class="buttons">
+
+                    <button class="btn add-btn" id="openAddModal">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Inventory
+                    </button>
+
+                    <button class="btn update-btn" id="openUpdateModal">
+                        <i class="fa-solid fa-pen"></i>
+                        Update Inventory
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- FILTERS -->
+            <div class="filters">
+
+                <select>
+                    <option>Blood Group</option>
+                    <option>A+</option>
+                    <option>A-</option>
+                    <option>B+</option>
+                    <option>O+</option>
+                </select>
+
+                <select>
+                    <option>Component / Type</option>
+                    <option>Plasma</option>
+                    <option>Platelets</option>
+                    <option>RBC</option>
+                </select>
+
+                <select>
+                    <option>District</option>
+                    <option>Mumbai</option>
+                    <option>Pune</option>
+                    <option>Nashik</option>
+                </select>
+
+                <select>
+                    <option>Blood Bank / Hospitals</option>
+                    <option>AIIMS</option>
+                    <option>Apollo</option>
+                </select>
+
+                <button class="search-btn">Search</button>
+
+            </div>
+
+
+            <!-- TABLE -->
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+                        <th>Hospitals / Blood Bank</th>
+                        <th>Blood Units ID</th>
+                        <th>Blood Group</th>
+                        <th>Components / Type</th>
+                        <th>Received Date</th>
+                        <th>Received Unit</th>
+                        <th>Reserved</th>
+                        <th>Used</th>
+                        <th>Available</th>
+                        <th>Expiry Date</th>
+                        <th>Expired Units</th>
+                        <th>Over-Reserved Units</th>
+                        <th>Location</th>
+                        <th>Send Request</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="inventoryTable">
+
+                    <tr>
+                        <td>Apollo Hospital</td>
+                        <td>BLD101</td>
+                        <td>A+</td>
+                        <td>Plasma</td>
+                        <td>05-05-2026</td>
+                        <td>20</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>11</td>
+                        <td>25-05-2026</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>Mumbai</td>
+                        <td>
+                            <button class="request-btn">Request</button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- ADD INVENTORY MODAL -->
+
+<div class="modal" id="addModal">
+
+    <div class="modal-box">
+
+        <span class="close-btn" id="closeAddModal">&times;</span>
+
+        <h2>ADD INVENTORY</h2>
+
+        <form id="addInventoryForm">
+
+            <label>Blood Bank / Hospitals</label>
+            <select required>
+                <option value="">Select</option>
+                <option>Apollo Hospital</option>
+                <option>AIIMS</option>
+            </select>
+
+            <label>Blood Group</label>
+            <select required>
+                <option value="">Select</option>
+                <option>A+</option>
+                <option>B+</option>
+                <option>O+</option>
+            </select>
+
+            <label>Component / Type</label>
+            <select required>
+                <option value="">Select</option>
+                <option>Plasma</option>
+                <option>Platelets</option>
+            </select>
+
+            <label>Blood Units ID</label>
+            <input type="text" required>
+
+            <label>Units (Quantity)</label>
+            <input type="number" required>
+
+            <label>District</label>
+            <select required>
+                <option value="">Select</option>
+                <option>Mumbai</option>
+                <option>Pune</option>
+            </select>
+
+            <label>Received Date</label>
+            <input type="date" required>
+
+            <label>Expiry Date</label>
+            <input type="date" required>
+
+            <button type="submit" class="modal-btn">Add</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- UPDATE INVENTORY MODAL -->
+
+<div class="modal" id="updateModal">
+
+    <div class="modal-box">
+
+        <span class="close-btn" id="closeUpdateModal">&times;</span>
+
+        <h2>UPDATE INVENTORY</h2>
+
+        <form id="updateInventoryForm">
+
+            <label>Blood Bank / Hospitals</label>
+            <select required>
+                <option value="">Select</option>
+                <option>Apollo Hospital</option>
+            </select>
+
+            <label>Blood Group</label>
+            <select required>
+                <option value="">Select</option>
+                <option>A+</option>
+                <option>B+</option>
+            </select>
+
+            <label>Component / Type</label>
+            <select required>
+                <option value="">Select</option>
+                <option>Plasma</option>
+            </select>
+
+            <label>Reserved Units</label>
+            <input type="number" required>
+
+            <button type="submit" class="modal-btn">
+                Update
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="inventory.js"></script>
+
+</body>
+</html>
